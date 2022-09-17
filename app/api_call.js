@@ -8,12 +8,15 @@ const nextBtn = document.querySelector('.next_button')
 
 const getArt = async function() {
     let currentPage = 1;
-    const API_URL = `https://api.artic.edu/api/v1/artworks?page=${currentPage}&limit=10`;
+    const API_URL = `https://api.artic.edu/api/v1/artworks?page=${currentPage}&limit=6`;
     const resArt = await fetch(API_URL);
     const resArtObject = await resArt.json();
-    const artArr = resArtObject.data
+    const resArtObjectPagination = resArtObject.pagination;
+    const resTotalPages = resArtObjectPagination.total_pages;
+     const artArr = resArtObject.data;
     const firstArt = resArtObject.data[0];
-    console.log(artArr);
+    console.log(resArtObjectPagination);
+    console.log(resTotalPages)
 
     // Iterate thru arr and render each art
     artArr.map(art => {
@@ -22,6 +25,10 @@ const getArt = async function() {
 
     nextBtn.addEventListener('click', function() {
         paginationNext(currentPage);
+    })
+
+    previousBtn.addEventListener('click', function() {
+        console.log('Previous')
     })
     
 }
@@ -48,6 +55,7 @@ const renderArt = function(art) {
 
 const paginationNext = function(page) {
     page++
-    console.log(page)
+    console.log("Next")
+    return page;
 }
 
