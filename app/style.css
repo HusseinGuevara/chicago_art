@@ -16,6 +16,7 @@ body {
     margin: 10px;
     border-radius: 5px;
     padding: .5em;
+    opacity: .5;
 }
 
 .web-body {
